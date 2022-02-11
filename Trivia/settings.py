@@ -201,3 +201,6 @@ STATICFILES_DIRS = (
 )
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+
+SESSION_ENGINE= 'django.contrib.sessions.backends.cached_db'
