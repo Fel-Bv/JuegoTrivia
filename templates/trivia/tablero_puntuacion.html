@@ -1,0 +1,15 @@
+{% extends 'base_trivia.html' %}
+
+{% load i18n %}
+
+{% block contenido %}
+    <div class="container">
+        <h1 class="col-12 text-center">
+            {% trans 'Top 10' %}
+        </h1>
+
+        {% include 'trivia/tabla_puntuacion.html' %}
+
+        <a class="btn btn-primary btn-block" id="jugar" href="/jugar">Jugar</a>
+    </div>
+{% endblock contenido %}

@@ -1,0 +1,9 @@
+header nav #botones {
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    display: flex;
+    height: 100%;
+    gap: 1rem;
+    right: 0;
+}

@@ -1,0 +1,34 @@
+{% load i18n %}
+
+<table class="table table-hover">
+    <caption>
+        {% trans 'Mejores puntuaciones' %}
+    </caption>
+    <thead>
+        <tr>
+            <th>{% trans 'Usuario' %}</th>
+            <th>{% trans 'Puntuación' %}</th>
+            <th>{% trans 'Nivel' %}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for usuario in usuarios %}
+            <tr
+                {% if usuario.username == user.username %}
+                    class="table-active"
+                {% endif %}
+            >
+                <td>{{ usuario.username }}</td>
+                <td>{{ usuario.puntuacion_actual }}</td>
+                <td>{{ usuario.nivel_juego }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr class="table-active">
+            <td>{{ user.username }}</td>
+            <td>{{ user.puntuacion_actual }}</td>
+            <td>{{ user.nivel_juego }}</td>
+        </tr>
+    </tfoot>
+</table>
