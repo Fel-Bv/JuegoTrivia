@@ -98,11 +98,13 @@ WSGI_APPLICATION = 'Trivia.wsgi.application'
 # }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'OPTIONS': {
-            'service': 'pg_service',
-            'passfile': '.pg_pass',
-        },
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'dcaroh76qcnd7u',
+        'USER': 'nxjvmqwbnoxhag',
+        'PASSWORD': '4e3f25a8173fcbcfb4521b74cfa52b38f9b0b9c8ada409a335ca5b83d894919c',
+        'HOST': 'ec2-54-144-165-97.compute-1.amazonaws.com',
+        'PORT': '5432',
+
     }
 }
 
