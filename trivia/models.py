@@ -1,3 +1,5 @@
+import imp
+from django.contrib.auth.models import User
 from django.utils.translation import gettext as _
 from django.db import models
 
@@ -20,3 +22,14 @@ class Pregunta(models.Model):
         help_text=_('Respuesta correcta'),
         name='respuesta_correcta',
     )
+
+class UsuarioJuego(models.Model):
+    usuario = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        to_field='id',
+        verbose_name=_('User ID')
+    )
+    # Propiedades del juego
+    puntuacion_actual = models.IntegerField(_('Current score'), default=0, null=True)
+    nivel_juego = models.IntegerField(_('Game level'), default=0, null=True)

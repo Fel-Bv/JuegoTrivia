@@ -1,7 +1,7 @@
-from django.contrib.auth.models import User
+from trivia.models import UsuarioJuego
 
 def obtener_mejores_puntuaciones():
-    usuarios = [* User.objects.all()]
+    usuarios = [* UsuarioJuego.objects.all()]
     if len(usuarios) > 10: usuarios = usuarios[:10]
 
     cambio = True

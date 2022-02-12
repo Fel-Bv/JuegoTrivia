@@ -2,12 +2,15 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from trivia.models import Pregunta
+from trivia.models import Pregunta, UsuarioJuego
 from .puntuaciones import obtener_mejores_puntuaciones
 
 def inicio(peticion):
     if peticion.user.is_authenticated:
+        usuario_juego = [* UsuarioJuego.objects.filter(usuario=peticion.user.id)][0]
+
         datos = {
+            'usuario_juego': usuario_juego,
             'usuarios': obtener_mejores_puntuaciones(),
         }
         if peticion.user.is_superuser:
@@ -24,6 +27,9 @@ def registro(peticion):
         formulario = UserCreationForm(peticion.POST)
         if formulario.is_valid():
             usuario = formulario.save()
+
+            usuario_juego = UsuarioJuego(usuario=usuario.id)
+            usuario_juego.save()
 
             login(peticion, usuario, backend='django.contrib.auth.backends.ModelBackend')
 

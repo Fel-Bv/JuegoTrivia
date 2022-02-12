@@ -14,11 +14,11 @@
     <tbody>
         {% for usuario in usuarios %}
             <tr
-                {% if usuario.username == user.username %}
+                {% if usuario.usuario.username == user.username %}
                     class="table-active"
                 {% endif %}
             >
-                <td>{{ usuario.username }}</td>
+                <td>{{ usuario.usuario.username }}</td>
                 <td>{{ usuario.puntuacion_actual }}</td>
                 <td>{{ usuario.nivel_juego }}</td>
             </tr>
@@ -27,8 +27,8 @@
     <tfoot>
         <tr class="table-active">
             <td>{{ user.username }}</td>
-            <td>{{ user.puntuacion_actual }}</td>
-            <td>{{ user.nivel_juego }}</td>
+            <td>{{ usuario_juego.puntuacion_actual }}</td>
+            <td>{{ usuario_juego.nivel_juego }}</td>
         </tr>
     </tfoot>
 </table>
