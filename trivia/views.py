@@ -2,7 +2,7 @@ from usuarios.puntuaciones import obtener_mejores_puntuaciones
 from django.utils.translation import gettext
 from django.shortcuts import redirect, render
 from django.contrib import messages
-from .models import Pregunta
+from .models import Pregunta, UsuarioJuego
 import random
 import json
 
@@ -39,6 +39,7 @@ def jugar(peticion):
         return redirect('usuarios:iniciar_sesion')
 
     if peticion.method == 'POST':
+        usuario_juego = [* UsuarioJuego.objects.filter(usuario=peticion.user.id)][0]
         respuestas_correctas = int(peticion.POST['respuestas_correctas'])
         if respuestas_correctas <= 5:
             mensaje = f'Tuviste {respuestas_correctas} respuesta'
@@ -53,12 +54,12 @@ def jugar(peticion):
             mensaje += 's.' if respuestas_correctas > 1 else '.'
             messages.success(peticion, gettext(mensaje))
 
-        peticion.user.puntuacion_actual += respuestas_correctas * 10
+        usuario_juego.puntuacion_actual += respuestas_correctas * 10
         try:
-            peticion.user.nivel_juego = peticion.user.puntuacion_actual // 200
+            usuario_juego.nivel_juego = usuario_juego.puntuacion_actual // 200
         except ZeroDivisionError:
             pass
-        peticion.user.save()
+        usuario_juego.save()
 
         return redirect('trivia:tablero_puntuacion')
 

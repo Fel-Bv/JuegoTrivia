@@ -7,7 +7,12 @@ from .puntuaciones import obtener_mejores_puntuaciones
 
 def inicio(peticion):
     if peticion.user.is_authenticated:
-        usuario_juego = [* UsuarioJuego.objects.filter(usuario=peticion.user.id)][0]
+        try:
+            usuario_juego = [* UsuarioJuego.objects.filter(usuario=peticion.user.id)][0]
+        except IndexError:
+            # Probablemente el usuario se registró con allauth, por lo que no se guardó
+            # un usuario en el juego.
+            usuario_juego = UsuarioJuego(usuario=peticion.user).save()
 
         datos = {
             'usuario_juego': usuario_juego,
@@ -28,7 +33,7 @@ def registro(peticion):
         if formulario.is_valid():
             usuario = formulario.save()
 
-            usuario_juego = UsuarioJuego(usuario=usuario.id)
+            usuario_juego = UsuarioJuego(usuario=usuario)
             usuario_juego.save()
 
             login(peticion, usuario, backend='django.contrib.auth.backends.ModelBackend')
