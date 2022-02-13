@@ -64,7 +64,7 @@ function eventos_crear_pregunta() {
 
         const respuestas = [];
         $respuestas.querySelectorAll('input').forEach($input_respuesta => {
-            respuestas.push($input_respuesta.value);
+            $input_respuesta.value && respuestas.push($input_respuesta.value);
         });
         $input_respuestas.value = JSON.stringify(respuestas);
 
