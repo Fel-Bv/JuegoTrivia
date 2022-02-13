@@ -54,7 +54,7 @@ def crear_pregunta(peticion):
     if peticion.method == 'POST':
         respuesta_correcta = int(peticion.POST['respuesta_correcta'])
         respuestas = json.loads(peticion.POST['respuestas'])
-        pregunta = peticion.POST['pregunta']
+        pregunta = peticion.POST['pregunta'].strip()
 
         pregunta_existente = validar_no_existencia_pregunta(peticion, pregunta)
         if pregunta_existente:

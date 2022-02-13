@@ -22,6 +22,9 @@ class Pregunta(models.Model):
         name='respuesta_correcta',
     )
 
+    def __str__(self):
+        return f'{self.texto}: {self.respuestas[self.respuesta_correcta]}'
+
 class UsuarioJuego(models.Model):
     usuario = models.ForeignKey(
         User,
@@ -32,3 +35,6 @@ class UsuarioJuego(models.Model):
     # Propiedades del juego
     puntuacion_actual = models.IntegerField(_('Current score'), default=0, null=True)
     nivel_juego = models.IntegerField(_('Game level'), default=0, null=True)
+
+    def __str__(self):
+        return f'{self.usuario}, {self.puntuacion_actual} - {self.nivel_juego}'
