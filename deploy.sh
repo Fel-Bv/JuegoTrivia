@@ -5,5 +5,6 @@ cp -r ../venv/lib/ .
 
 git add .
 git commit
+#git push -u origin main
 git push heroku master
 
