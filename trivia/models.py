@@ -8,10 +8,9 @@ class Pregunta(models.Model):
         verbose_name=_('Pregunta'),
         name='texto',
         max_length=255,
-        editable=False,
         blank=False,
         null=False,
-        help_text=''
+        help_text=_('Text')
     )
     respuestas = models.JSONField(
         verbose_name=_('Respuestas'),

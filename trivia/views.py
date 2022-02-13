@@ -4,6 +4,7 @@ from django.shortcuts import redirect, render
 from django.contrib import messages
 from .models import Pregunta, UsuarioJuego
 import random
+import string
 import json
 
 def crear_pregunta(peticion):
@@ -15,6 +16,45 @@ def crear_pregunta(peticion):
         respuestas = json.loads(peticion.POST['respuestas'])
         pregunta = peticion.POST['pregunta']
 
+        # Validación de que la pregunta no está registrada aún:
+        preguntas_registradas = [pregunta.texto for pregunta in Pregunta.objects.all()]
+        caracteres_admitidos = string.ascii_lowercase + string.digits
+        acentos = {
+            'a': 'á',
+            'e': 'é',
+            'i': 'í',
+            'o': 'ó',
+            'u': 'ú',
+        }
+        for pregunta_registrada in preguntas_registradas:
+            pregunta_registrada = pregunta_registrada.lower()
+            pregunta = pregunta.lower()
+
+            _pregunta_registrada = ''
+            _pregunta = ''
+            for caracter in pregunta_registrada:
+                for caracter_admitido in caracteres_admitidos:
+                    if caracter == caracter_admitido:
+                        _pregunta_registrada += caracter
+
+                for letra in acentos.keys():
+                    if caracter == acentos[letra]:
+                        _pregunta_registrada += letra
+
+            for caracter in pregunta:
+                for caracter_admitido in caracteres_admitidos:
+                    if caracter == caracter_admitido:
+                        _pregunta += caracter
+
+                for letra in acentos.keys():
+                    if caracter == acentos[letra]:
+                        _pregunta += letra
+
+            if _pregunta == _pregunta_registrada:
+                messages.error(peticion, 'Esta pregunta ya está registrada.')
+                return redirect('trivia:crear_pregunta')
+
+        # Valida que el indice de la respuesta correcta no sea mayor al número de respuestas:
         if respuesta_correcta + 1 > len(respuestas):
             messages.error(
                 peticion,
