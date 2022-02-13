@@ -1,0 +1,58 @@
+@import url('../colores.css');
+
+.aplicaciones-sociales {
+    justify-content: center;
+    margin-bottom: 10px;
+    align-items: center;
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+}
+
+.aplicaciones-sociales a {
+    background-color: var(--bgc-primario);
+    box-shadow: 0 2px 4px #ccc;
+    text-decoration: none;
+    align-items: center;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    height: 40px;
+    width: 20rem;
+}
+.aplicaciones-sociales a:hover {
+    text-decoration: none;
+    opacity: .8;
+    scale: .99;
+}
+
+.aplicaciones-sociales a img {
+    margin: 0 .7em;
+    width: 10%;
+}
+
+.aplicaciones-sociales a p {
+    text-align: center;
+    width: 80%;
+    padding: 0;
+    margin: 0;
+}
+
+#google-logo { background-color: #fff; }
+#facebook-logo { background-color: #3B5998; }
+
+.division-formulario {
+    border-bottom: 1px solid lightgray;
+    text-align: center;
+    margin: 20px 0;
+    height: 15px;
+    width: 100%;
+}
+
+.division-formulario span {
+    margin-top: -15% !important;
+    background-color: #fff;
+    font-size: 11px;
+    padding: 0 10px;
+}

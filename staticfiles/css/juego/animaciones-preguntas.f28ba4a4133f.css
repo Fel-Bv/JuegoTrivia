@@ -1,0 +1,31 @@
+@keyframes siguiente_pregunta_arriba {
+    from {
+        position: absolute;
+        top: 0;
+    }
+    to {
+        top: -100vh;
+        display: none;
+    }
+}
+
+.siguiente-pregunta-arriba {
+    animation-name: siguiente_pregunta_arriba;
+    animation-duration: 2s;
+}
+
+@keyframes siguiente_pregunta_abajo {
+    from {
+        position: absolute;
+        top: 0;
+    }
+    to {
+        top: 100vh;
+        display: none;
+    }
+}
+
+.siguiente-pregunta-abajo {
+    animation-name: siguiente_pregunta_abajo;
+    animation-duration: 2s;
+}
