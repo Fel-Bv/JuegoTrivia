@@ -1,0 +1,12 @@
+{% extends 'base_trivia.html' %}
+
+{% load i18n %}
+
+{% block contenido %}
+    <div class="container">
+        {% include 'trivia/tabla_puntuacion.html' %}
+
+        <a class="btn btn-primary btn-block" href="/jugar">Jugar</a>
+        <a class="btn-block text-center" href="/">Inicio</a>
+    </div>
+{% endblock contenido %}

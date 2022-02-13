@@ -5,6 +5,6 @@
 
 git add .
 git commit
-#git push -u origin main
-git push heroku master
+git push -u origin main
+#git push heroku master
 

@@ -1,0 +1,123 @@
+{% load static %}
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Trivia {% block titulo %}{% endblock titulo %}</title>
+
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+    <link
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        href="{% static 'css/bootstrap/bootstrap.min.css' %}"
+        crossorigin="anonymous"
+        rel="stylesheet"
+    >
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+    <link rel="stylesheet" href="{% static 'css/estilos-media-queries.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mensajes.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animaciones.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navegacion/estilos.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navegacion/estilos-media-queries.css' %}">
+    <link rel="stylesheet" href="{% static 'css/password/campo-password.css' %}">
+    {% block estilos %}
+    {% endblock estilos %}
+    
+    <script>
+        const STATIC_DIR = "{% static '/' %}";
+    </script>
+    <script src="{% static 'js/navegacion/submenu/submenu.js' %}"></script>
+    <script src="{% static 'js/password/campo-password.js' %}"></script>
+    <script src="{% static 'js/mensajes.js' %}"></script>
+    {% block scripts %}
+    {% endblock scripts %}
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="/" class="text-dark">
+                <h1>Trivia</h1>
+            </a>
+
+            {% if user.is_authenticated %}
+                <section id="perfil" class="boton-submenu derecha">
+                    <figure>
+                        <img src="{% static 'img/icono-usuario.svg' %}" alt="">
+                    </figure>
+
+                    <section class="contenedor-submenu derecha d-none">
+                        <menu class="submenu">
+                            <ul>
+                                <li class="no-clic">
+                                    <p>{{ user.username }}</p>
+                                </li>
+                                <li>
+                                    <a href="/iniciar_sesion">{% trans "Cerrar sesión" %}</a>
+                                </li>
+                            </ul>
+                        </menu>
+                    </section>
+                </section>
+            {% else %}
+                <section id="botones">
+                    <a href="/iniciar_sesion">
+                        <button class="btn">{% trans "Iniciar sesión" %}</button>
+                    </a>
+                    <a href="/registro">
+                        <button class="btn">{% trans "Regístrate" %}</button>
+                    </a>
+                </section>
+
+                <section class="boton-submenu izquierda">
+                    <figure>
+                        <img src="{% static 'img/burger-menu.svg' %}" alt="Submenu">
+                    </figure>
+
+                    <section class="contenedor-submenu izquierda d-none">
+                        <menu class="submenu">
+                            <ul>
+                                <li>
+                                    <a href="/iniciar_sesion">{% trans "Iniciar sesión" %}</a>
+                                </li>
+                                <li>
+                                    <a href="/registro">{% trans "Regístrate" %}</a>
+                                </li>
+                            </ul>
+                        </menu>
+                    </section>
+                </section>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main>
+        {% if messages %}
+            <section class="mensajes container">
+                {% for message in messages %}
+                    <div class="mensaje {{ message.tags }}">
+                        <p>
+                            {% blocktrans %}{{ message }}{% endblocktrans %}
+                        </p>
+                    </div>
+                {% endfor %}
+            </section>
+
+            <script id="agregar_script_mensajes">
+                document.head.innerHTML += `
+                <script src="{% static 'js/mensajes.js' %}">
+                `;
+                document.getElementById('agregar_script_mensajes').remove();
+            </script>
+        {% endif %}
+
+        {% block contenido %}
+        {% endblock contenido %}
+        {% block content %}
+        {% endblock content %}
+    </main>
+</body>
+</html>

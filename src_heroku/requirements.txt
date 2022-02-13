@@ -1,0 +1,7 @@
+django-crispy-forms
+dj-database-url
+django-allauth
+whitenoise
+gunicorn
+psycopg2
+django

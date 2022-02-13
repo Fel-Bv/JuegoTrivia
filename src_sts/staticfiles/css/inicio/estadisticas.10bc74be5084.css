@@ -1,0 +1,22 @@
+@import url("../colores.357ce5cf847f.css");
+
+#estadisticas {
+    justify-content: center;
+    align-items: center;
+    min-height: 7em;
+    padding: .5em 0;
+    display: flex;
+    margin: 1em 0;
+    gap: 1em;
+}
+
+#estadisticas div {
+    background-color: var(--bgc-secundario);
+    flex-direction: column;
+    border-radius: 5px;
+    text-align: center;
+    display: flex;
+    padding: .5em;
+    height: 6em;
+    width: 100%;
+}

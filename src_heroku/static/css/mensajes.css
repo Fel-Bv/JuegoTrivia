@@ -1,0 +1,38 @@
+.mensajes {
+    flex-direction: column;
+    display: flex;
+    gap: 1rem;
+}
+
+.mensaje {
+    border-radius: 5px;
+    font-weight: 600;
+    min-height: 3em;
+    height: auto;
+    width: 100%;
+}
+
+.mensaje p {
+    height: calc(100% - 1rem);
+    width: calc(100% - 2em);
+    margin: .5rem 1em;
+}
+
+.mensaje.info {
+    box-shadow: 0 2px 4px #094074;
+    background-color: #3C6997;
+    border: 1px solid #094074;
+    color: #FEFFEA;
+}
+.mensaje.success {
+    box-shadow: 0 2px 4px #72BD79;
+    background-color: #B2FFA9;
+    border: 1px solid #72BD79;
+    color: #131B23;
+}
+.mensaje.error {
+    box-shadow: 0 2px 4px #DF2A1A;
+    background-color: #FF4A1C;
+    border: 1px solid #DF2A1A;
+    color: #FEFFEA;
+}

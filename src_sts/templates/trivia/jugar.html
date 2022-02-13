@@ -1,0 +1,56 @@
+{% extends 'base_trivia.html' %}
+
+{% load static %}
+{% load i18n %}
+
+{% block estilos %}
+    <link rel="stylesheet" href="{% static 'css/juego/juego.css' %}">
+{% endblock estilos %}
+
+{% block scripts %}
+    <script src="{% static 'js/juego/juego.js' %}"></script>
+{% endblock scripts %}
+
+{% block contenido %}
+    <section id="contenedor-contador">        
+        <div id="contador">
+            Pregunta <b id="pregunta-actual">1</b> de <b>10</b>
+        </div>
+
+        <div id="barra">
+            <div></div>
+        </div>
+    </section>
+
+    <div class="container">
+        <form method="post" id="form-preguntas">
+            {% csrf_token %}
+
+            <input type="hidden" name="respuestas_correctas" id="respuestas-correctas" value="0">
+
+            {% for pregunta in preguntas %}
+                <section
+                    class="pregunta"
+                    data-respuesta-correcta="{{ pregunta.respuesta_correcta }}"
+                >
+                    <div class="cabecera-pregunta">
+                        <p>
+                            {{ pregunta.texto }}
+                        </p>
+                    </div>
+
+                    <div class="respuestas">
+                        {% for respuesta in pregunta.respuestas %}
+                            <button
+                                class="btn btn-light btn-block"
+                                type="button"
+                            >
+                                {{ respuesta }}
+                            </button>
+                        {% endfor %}
+                    </div>
+                </section>
+            {% endfor %}
+        </form>
+    </div>
+{% endblock contenido %}

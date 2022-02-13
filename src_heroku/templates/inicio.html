@@ -1,0 +1,61 @@
+{% extends 'base_trivia.html' %}
+
+{% load static %}
+{% load i18n %}
+
+{% block estilos %}
+    <link rel="stylesheet" href="{% static 'css/inicio/acciones.css' %}">
+    <link rel="stylesheet" href="{% static 'css/inicio/estadisticas.css' %}">
+    <link rel="stylesheet" href="{% static 'css/inicio/estadisticas-media-queries.css' %}">
+{% endblock estilos %}
+
+{% block contenido %}
+    <section class="container">
+        <h1 class="col-12 text-center">
+            {{ user.username }}
+        </h1>
+
+        <section id="estadisticas">
+            <div>
+                <h4>{% translate "Puntuación Actual" %}</h4>
+                <h5>{{ usuario_juego.puntuacion_actual }}</h5>
+            </div>
+            <div>
+                <h4>{% translate "Nivel" %}</h4>
+                <h5>{{ usuario_juego.nivel_juego }}</h5>
+            </div>
+        </section>
+
+        <section id="acciones">
+            <a class="btn btn-primary btn-block" id="crear-pregunta" href="/crear_pregunta">
+                <img src="{% static 'img/plus.png' %}" alt="{% trans 'Plus' %}">
+                Crear Pregunta
+            </a>
+            <a class="btn btn-primary btn-block" id="jugar" href="/jugar">Jugar</a>
+        </section>
+
+        <section class="my-5">
+            {% include 'trivia/tabla_puntuacion.html' %}
+        </section>
+
+        {% if user.is_superuser %}
+            <section class="my-5">
+                <h1>Preguntas registradas</h1>
+                <hr>
+                {% for pregunta in preguntas %}
+                    <div>
+                        <h3>{{ pregunta.texto }}</h3>
+
+                        <ul>
+                            {% for respuesta in pregunta.respuestas %}
+                                <li>{{ respuesta }}</li>
+                            {% endfor %}
+                        </ul>
+                        Respuesta correcta: {{ pregunta.respuesta_correcta }}
+                    </div>
+                    <hr>
+                {% endfor %}
+            </section>
+        {% endif %}
+    </section>
+{% endblock contenido %}

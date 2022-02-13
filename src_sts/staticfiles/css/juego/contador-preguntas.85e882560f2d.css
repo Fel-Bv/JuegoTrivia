@@ -1,0 +1,49 @@
+@import url("../colores.357ce5cf847f.css");
+
+#contenedor-contador {
+    position: relative;
+    margin-bottom: 1em;
+    width: 100vw;
+    height: 2em;
+    left: 0;
+}
+
+#barra {
+    position: absolute;
+    display: flex;
+    height: .75em;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+}
+
+#barra div {
+    background-color: var(--color-extra);
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    position: relative;
+    height: 100%;
+    padding: 0;
+    width: 10%;
+    margin: 0;
+}
+#barra div::before {
+    content: '';
+
+    background-color: inherit;
+    display: inline-block;
+    position: absolute;
+    height: 100%;
+    width: 10px;
+    left: -10px;
+    top: 0;
+}
+
+#contador {
+    text-align: center;
+    position: absolute;
+    height: 1.25em;
+    width: 100%;
+    left: 0;
+    top: 0;
+}
