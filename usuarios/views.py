@@ -1,6 +1,8 @@
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from allauth.account.utils import complete_signup
 from django.contrib.auth import login, logout
 from django.shortcuts import render, redirect
+from allauth.account import app_settings
 from django.contrib import messages
 from trivia.models import Pregunta, UsuarioJuego
 from .puntuaciones import obtener_mejores_puntuaciones
@@ -31,14 +33,17 @@ def registro(peticion):
     if peticion.method == 'POST':
         formulario = UserCreationForm(peticion.POST)
         if formulario.is_valid():
+            formulario.instance.email = peticion.POST['email']
             usuario = formulario.save()
 
             usuario_juego = UsuarioJuego(usuario=usuario)
             usuario_juego.save()
 
-            login(peticion, usuario, backend='django.contrib.auth.backends.ModelBackend')
+            # login(peticion, usuario, backend='django.contrib.auth.backends.ModelBackend')
 
-            return redirect('usuarios:inicio')
+            # return redirect('usuarios:inicio')
+
+            return complete_signup(peticion, usuario, app_settings.EMAIL_VERIFICATION, '/')
 
         messages.error(peticion, formulario.errors)
 
